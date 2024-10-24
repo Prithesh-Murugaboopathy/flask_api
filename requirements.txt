@@ -42,9 +42,9 @@ setuptools==75.2.0
 six==1.16.0
 sympy==1.13.1
 tokenizers==0.20.1
-torch==2.5.0+cu118
-torchaudio==2.5.0+cu118
-torchvision==0.20.0+cu118
+torch==2.1.2  # Ensure compatibility with your Python version
+torchaudio==2.5.0  # Removed +cu118
+torchvision==0.20.0  # Removed +cu118
 tqdm==4.66.5
 traits==6.4.3
 transformers==4.46.0
