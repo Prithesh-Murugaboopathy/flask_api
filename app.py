@@ -11,9 +11,17 @@ from transformers import (
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+
+
+
+
 # Initialize Flask app
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all domains
+
+@app.route('/')
+def home():
+    return 'Hello, Flask!'
 
 # Function to extract text from PDF
 def extract_text_from_pdf(pdf_path):
