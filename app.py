@@ -62,10 +62,12 @@ CORS(app)  # Enable CORS for all domains
 
 # Function to generate a response
 def generate_response(model, tokenizer, question):
-    tokenizer.pad_token = tokenizer.eos_token  # Set the pad token to eos token
+    tokenizer.pad_token = tokenizer.eos_token  # Set the pad token to EOS token
     
+    # Encode the input question
     inputs = tokenizer.encode_plus(question, return_tensors='pt', padding=True)
     
+    # Generate response using the model
     outputs = model.generate(
         inputs['input_ids'], 
         attention_mask=inputs['attention_mask'], 
@@ -76,6 +78,7 @@ def generate_response(model, tokenizer, question):
         pad_token_id=tokenizer.eos_token_id
     )
     
+    # Decode and return the response
     response = tokenizer.decode(outputs[0], skip_special_tokens=True)
     return response
 
@@ -83,7 +86,7 @@ def generate_response(model, tokenizer, question):
 @app.route('/api/chat', methods=['POST'])
 def chat():
     data = request.json
-    question = data.get('question', '')
+    question = data.get('question', '')  # Default to an empty string if no question is provided
     response = generate_response(model, tokenizer, question)
     return jsonify({'response': response})
 
